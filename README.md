@@ -105,7 +105,7 @@ The repository can be used to review the application's implementation, run the p
 A full video presentation of **PitchPerfect 2** is available below.
 
 **YouTube Video:**
-🔗 https://youtube.com/shorts/-t8TppDwr1A?si=xxlj5moPlcJZ2MD3
+🔗https://youtube.com/shorts/bE1o1mbQJAs
 
 AI Usage Declaration
 During the completion of the PitchPerfect Part 2 prototype, I used AI tools (ChatGPT) primarily for guidance, debugging, and architectural advice. AI was not used to generate the application autonomously; instead, it served as a learning assistant to help me understand technical concepts, troubleshoot errors, and structure my code following best practices.
