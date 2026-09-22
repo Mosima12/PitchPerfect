@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331569293082",
+    "project_id": "pitchperfect-496f6",
+    "storage_bucket": "pitchperfect-496f6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331569293082:android:08c09cae2beef8b7a0aea3",
+        "android_client_info": {
+          "package_name": "com.pitchperfect.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfKNfZ1UNUiu60BZuhBlHgcjxxgYM60Hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
