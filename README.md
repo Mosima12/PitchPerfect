@@ -107,3 +107,27 @@ A full video presentation of **PitchPerfect 2** is available below.
 **YouTube Video:**
 🔗 https://youtube.com/shorts/-t8TppDwr1A?si=xxlj5moPlcJZ2MD3
 
+AI Usage Declaration
+During the completion of the PitchPerfect Part 2 prototype, I used AI tools (ChatGPT) primarily for guidance, debugging, and architectural advice. AI was not used to generate the application autonomously; instead, it served as a learning assistant to help me understand technical concepts, troubleshoot errors, and structure my code following best practices.
+
+1. Architectural Guidance
+
+AI was used to explain industry-standard architectural patterns for Android development. Based on this guidance, I structured PitchPerfect using an MVVM-inspired approach:
+
+Separating UI (Fragments) from business logic (AuthManager, ApiService)
+
+Using Kotlin Coroutines for asynchronous operations
+
+Implementing a single HomeActivity with a BottomNavigationView hosting five feature fragments
+
+I made the final decisions on which patterns to apply and how to structure the packages.
+
+2. Debugging Assistance
+
+I encountered several technical errors during development and used AI to help me understand them, rather than just fix them. Cited examples include:
+
+Gradle sync errors when migrating from the default Jetpack Compose template to XML Views. AI explained the cause (conflicting plugin references) and guided me to rewrite build.gradle.kts with explicit plugin IDs.
+
+Firebase error [CONFIGURATION_NOT_FOUND] — AI guided me through the diagnostic process: checking the INTERNET permission in AndroidManifest.xml and enabling the Email/Password sign-in method in the Firebase Console.
+
+Duplicate account errors — AI explained that Firebase intentionally rejects duplicate emails and helped me understand the correct testing approach.
