@@ -16,12 +16,17 @@ class DiscoverFragment : Fragment() {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_discover, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val tvFeed = view.findViewById<TextView>(R.id.tvDiscoverFeed)
         val progress = view.findViewById<ProgressBar>(R.id.progressDiscover)
 
@@ -59,7 +64,7 @@ class DiscoverFragment : Fragment() {
             }
             .addOnFailureListener {
                 progress.visibility = View.GONE
-                tvFeed.text = "⚠️ Could not load students. Pull to refresh."
+                tvFeed.text = "⚠️ Could not load students. Please try again later."
             }
     }
 }

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/navy"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="20dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Settings"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Preferences Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preferences"
+                android:textColor="@color/text_gray"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Push Notifications"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+
+                        <Switch
+                            android:id="@+id/switchNotifications"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_gray"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Public Profile"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+
+                        <Switch
+                            android:id="@+id/switchPublicProfile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_gray"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Match Alerts"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+
+                        <Switch
+                            android:id="@+id/switchMatchAlerts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Account Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textColor="@color/text_gray"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnChangePassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Change Password"
+                        android:textColor="@color/text_dark"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@android:color/transparent"
+                        android:gravity="start|center_vertical"
+                        android:padding="10dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Danger Zone -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Danger Zone"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Account"
+                android:textColor="@color/red"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/red"
+                app:strokeWidth="1dp"
+                app:cornerRadius="28dp"
+                android:padding="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="PitchPerfect v1.0 — Part 2 Prototype\n© 2026 Mosima Chantel Leboho"
+                android:textColor="@color/text_light_gray"
+                android:textSize="11sp"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
