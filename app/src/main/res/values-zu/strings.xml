@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PitchPerfect</string>
+    <string name="tagline">Lapho abasunguli abangabafundi bethola khona iqembu labo.</string>
+    <string name="register">Bhalisa</string>
+    <string name="login">Ngena</string>
+    <string name="create_account">Dala i-akhawunti yakho</string>
+    <string name="full_name">Igama eliphelele</string>
+    <string name="university">Inyuvesi</string>
+    <string name="university_email">I-imeyili yaseNyuvesi (.ac.za)</string>
+    <string name="password">Iphasiwedi</string>
+    <string name="create_account_btn">Dala i-Akhawunti</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_home">Ikhaya</string>
+    <string name="nav_discover">Thola</string>
+    <string name="nav_projects">Amaphrojekthi</string>
+    <string name="nav_messages">Imilayezo</string>
+    <string name="nav_profile">Iphrofayela</string>
+
+    <string name="settings">Izilungiselelo</string>
+    <string name="language">Ulimi Lohlelo</string>
+    <string name="english">IsiNgisi</string>
+    <string name="afrikaans">IsiBhunu</string>
+    <string name="isizulu">isiZulu</string>
+    <string name="select_language">Khetha Ulimi</string>
+</resources>

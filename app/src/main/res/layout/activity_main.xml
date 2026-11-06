@@ -201,6 +201,31 @@
                     android:layout_marginTop="24dp"
                     android:text="Create Account" />
 
+                <!-- FIXED: SSO Divider and Button -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border_gray"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogleSSO"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="Continue with Google"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_dark"
+                    app:icon="@android:drawable/ic_menu_compass"
+                    app:iconTint="#DB4437"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="@color/border_gray"
+                    app:strokeWidth="1dp"
+                    app:backgroundTint="@color/white" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
