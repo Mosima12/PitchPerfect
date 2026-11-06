@@ -12,7 +12,20 @@
           "package_name": "com.pitchperfect.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "331569293082-kuieq4m8plvffj4eefnnnk3qorbthkd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pitchperfect.app",
+            "certificate_hash": "7e73a1752fdc126ef0f6076713115a6dba967ebd"
+          }
+        },
+        {
+          "client_id": "331569293082-2mbr93f91bgfmsnflgfvs65r5g778ikv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBfKNfZ1UNUiu60BZuhBlHgcjxxgYM60Hg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331569293082-2mbr93f91bgfmsnflgfvs65r5g778ikv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

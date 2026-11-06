@@ -15,12 +15,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-/**
- * ProfileFragment — Displays user profile data, allows editing bio/skills,
- * and provides access to Settings and Logout.
- *
- * Reference: Firebase Firestore — https://firebase.google.com/docs/firestore/manage-data/add-data
- */
 class ProfileFragment : Fragment() {
 
     private val TAG = "ProfileFragment"
@@ -43,26 +37,22 @@ class ProfileFragment : Fragment() {
         val btnSave = view.findViewById<Button>(R.id.btnSaveProfile)
         val btnSettings = view.findViewById<Button>(R.id.btnSettings)
         val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+        val btnFindMentor = view.findViewById<Button>(R.id.btnFindMentor) // NEW
 
         val userId = auth.currentUser?.uid
         if (userId == null) {
-            Log.w(TAG, "No user logged in — redirecting to MainActivity")
             startActivity(Intent(requireContext(), MainActivity::class.java))
             return
         }
 
-        // Load user profile from Firestore
+        // Load user profile
         db.collection("users").document(userId).get()
             .addOnSuccessListener { doc ->
-                Log.d(TAG, "Loaded profile for $userId")
                 tvName.text = doc.getString("name") ?: "Student"
                 tvUniversity.text = doc.getString("university") ?: ""
                 etBio.setText(doc.getString("bio") ?: "")
                 val skills = doc.get("skills") as? List<*>
                 etSkills.setText(skills?.joinToString(", ") ?: "")
-            }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Failed to load profile", e)
             }
 
         // Save updated bio and skills
@@ -72,31 +62,27 @@ class ProfileFragment : Fragment() {
             val skillsList = if (skillsInput.isEmpty()) emptyList()
             else skillsInput.split(",").map { it.trim() }
 
-            Log.d(TAG, "Saving profile — bio length=${bio.length}, skills=$skillsList")
-
             db.collection("users").document(userId).update(
-                mapOf(
-                    "bio" to bio,
-                    "skills" to skillsList
-                )
+                mapOf("bio" to bio, "skills" to skillsList)
             ).addOnSuccessListener {
-                Log.d(TAG, "Profile updated successfully")
                 Toast.makeText(requireContext(), "Profile updated!", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener { e ->
-                Log.e(TAG, "Failed to update profile", e)
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
 
         // Open Settings
         btnSettings.setOnClickListener {
-            Log.d(TAG, "Navigating to SettingsActivity")
             startActivity(Intent(requireContext(), SettingsActivity::class.java))
+        }
+
+        // Open Find Mentor (NEW)
+        btnFindMentor.setOnClickListener {
+            startActivity(Intent(requireContext(), FindMentorActivity::class.java))
         }
 
         // Logout
         btnLogout.setOnClickListener {
-            Log.d(TAG, "Logging out user $userId")
             auth.signOut()
             startActivity(Intent(requireContext(), MainActivity::class.java))
             requireActivity().finish()

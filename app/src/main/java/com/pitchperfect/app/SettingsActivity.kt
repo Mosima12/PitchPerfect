@@ -1,22 +1,20 @@
 package com.pitchperfect.app
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.Locale
 
-/**
- * SettingsActivity — Application preferences screen.
- * Allows users to manage notifications, privacy, and account.
- *
- * Reference: SharedPreferences — https://developer.android.com/training/data-storage/shared-preferences
- */
 class SettingsActivity : AppCompatActivity() {
 
     private val TAG = "SettingsActivity"
@@ -34,6 +32,32 @@ class SettingsActivity : AppCompatActivity() {
             Log.d(TAG, "Back button pressed")
             finish()
         }
+
+        // --- LANGUAGE SWITCHER LOGIC ---
+        val btnLanguage = findViewById<Button>(R.id.btnLanguage)
+
+        // Show current language on the button
+        val currentLang = LocaleHelper.getSavedLanguage(this)
+        btnLanguage.text = when (currentLang) {
+            "af" -> getString(R.string.afrikaans)
+            "zu" -> getString(R.string.isizulu)
+            else -> getString(R.string.english)
+        }
+
+        btnLanguage.setOnClickListener {
+            val languages = arrayOf(getString(R.string.english), getString(R.string.afrikaans), getString(R.string.isizulu))
+            val codes = arrayOf("en", "af", "zu")
+
+            AlertDialog.Builder(this)
+                .setTitle(R.string.select_language)
+                .setItems(languages) { _, which ->
+                    val selectedCode = codes[which]
+                    LocaleHelper.saveLanguage(this, selectedCode)
+                    recreate() // Restart activity to apply the new language instantly
+                }
+                .show()
+        }
+        // -------------------------------
 
         val switchNotifications = findViewById<Switch>(R.id.switchNotifications)
         val switchPublicProfile = findViewById<Switch>(R.id.switchPublicProfile)
@@ -98,5 +122,11 @@ class SettingsActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    // This is crucial! It applies the language before the screen loads.
+    override fun attachBaseContext(newBase: Context) {
+        val lang = LocaleHelper.getSavedLanguage(newBase)
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang))
     }
 }

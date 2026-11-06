@@ -1,70 +1,125 @@
 package com.pitchperfect.app
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.pitchperfect.app.data.RetrofitClient
-import kotlinx.coroutines.launch
-
 
 class HomeFragment : Fragment() {
 
-    private val auth = Firebase.auth
     private val db = Firebase.firestore
-    private val TAG = "HomeFragment"
+    private val auth = Firebase.auth
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvStatPoints = view.findViewById<TextView>(R.id.tvStatPoints)
-        val tvStatProjects = view.findViewById<TextView>(R.id.tvStatProjects)
-        val tvStatMatches = view.findViewById<TextView>(R.id.tvStatMatches)
-        val tvStatBadges = view.findViewById<TextView>(R.id.tvStatBadges)
-        val tvApiInsight = view.findViewById<TextView>(R.id.tvApiInsight)
+        val rvRecommendations = view.findViewById<RecyclerView>(R.id.rvRecommendations)
+        rvRecommendations.layoutManager = LinearLayoutManager(context)
+        val adapter = IdeaAdapter()
+        rvRecommendations.adapter = adapter
 
-        val userId = auth.currentUser?.uid ?: return
-        db.collection("users").document(userId).get()
-            .addOnSuccessListener { doc ->
-                val points = doc.getLong("points") ?: 0
-                tvStatPoints.text = points.toString()
-            }
+        val currentUserId = auth.currentUser?.uid
 
-        db.collection("projects").get().addOnSuccessListener { result ->
-            tvStatProjects.text = result.size().toString()
-        }
+        if (currentUserId != null) {
+            // 1. Fetch current user's skills
+            db.collection("users").document(currentUserId).get()
+                .addOnSuccessListener { userDoc ->
+                    // Get skills, if empty, assume empty list
+                    val mySkills = userDoc.get("skills") as? List<String> ?: emptyList()
 
-        db.collection("users").get().addOnSuccessListener { result ->
-            tvStatMatches.text = (result.size() - 1).coerceAtLeast(0).toString()
-        }
+                    // 2. Fetch all ideas
+                    db.collection("ideas").get().addOnSuccessListener { result ->
+                        val ideaList = mutableListOf<BusinessIdea>()
+                        for (document in result) {
+                            val idea = document.toObject(BusinessIdea::class.java)
+                            ideaList.add(idea)
+                        }
 
-        tvStatBadges.text = "1"
+                        // 3. Show dummy data if empty
+                        if (ideaList.isEmpty()) {
+                            ideaList.add(BusinessIdea(title = "Student Marketplace", problem = "Students struggle to buy and sell second-hand items affordably within their campus community.", solution = "A mobile-first marketplace exclusive to verified students, enabling secure local trades with built-in escrow.", category = "Development", requiredSkills = listOf("Web", "Marketing", "UI/UX")))
+                            ideaList.add(BusinessIdea(title = "Campus EcoTracker", problem = "Track and reduce campus carbon footprint.", solution = "Gamified app for tracking eco-friendly habits.", category = "Prototype", requiredSkills = listOf("Android", "Python", "UI/UX")))
+                            ideaList.add(BusinessIdea(title = "StudyBuddy AI", problem = "Students need personalized study help.", solution = "An AI tutor that adapts to your learning style.", category = "Research", requiredSkills = listOf("Kotlin", "AI", "Data")))
+                        }
 
-        // REST API INTEGRATION — fetch live data
-        lifecycleScope.launch {
-            try {
-                val posts = RetrofitClient.api.getPosts()
-                Log.d(TAG, "API call successful: ${posts.size} posts")
-                val sample = posts.firstOrNull()
-                tvApiInsight.text = if (sample != null) {
-                    "\"${sample.title.take(80)}...\"\n\n— Live from JSONPlaceholder API"
-                } else {
-                    "No insights available"
+                        // 4. Submit data AND skills to the adapter
+                        adapter.submitList(ideaList, mySkills)
+                    }
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "API call failed", e)
-                tvApiInsight.text = "Could not load insights. Check your internet connection."
+        } else {
+            // Fallback if user is somehow not logged in
+            adapter.submitList(emptyList(), emptyList())
+        }
+    }
+
+    // Inner Adapter Class
+    inner class IdeaAdapter : RecyclerView.Adapter<IdeaAdapter.IdeaViewHolder>() {
+        private var ideas = listOf<BusinessIdea>()
+        private var userSkills = listOf<String>()
+
+        fun submitList(newIdeas: List<BusinessIdea>, mySkills: List<String>) {
+            ideas = newIdeas
+            userSkills = mySkills
+            notifyDataSetChanged()
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeaViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_discover_card, parent, false)
+            return IdeaViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: IdeaViewHolder, position: Int) {
+            val idea = ideas[position]
+            holder.bind(idea, userSkills)
+        }
+
+        override fun getItemCount() = ideas.size
+
+        inner class IdeaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            fun bind(idea: BusinessIdea, mySkills: List<String>) {
+                itemView.findViewById<TextView>(R.id.tvTitle).text = idea.title
+                itemView.findViewById<TextView>(R.id.tvSubtitle).text = idea.category
+                itemView.findViewById<TextView>(R.id.tvDescription).text = idea.problem
+
+                // --- USER DEFINED FEATURE: REAL ALGORITHM ---
+                val score = MatchAlgorithm.calculateMatchScore(mySkills, idea.requiredSkills)
+                itemView.findViewById<TextView>(R.id.tvMatchScore).text = "$score% MATCH"
+                // ---------------------------------------------
+
+                val chipGroup = itemView.findViewById<ChipGroup>(R.id.chipGroup)
+                chipGroup.removeAllViews()
+                for (skill in idea.requiredSkills) {
+                    val chip = Chip(itemView.context)
+                    chip.text = skill
+                    chipGroup.addView(chip)
+                }
+
+                itemView.findViewById<View>(R.id.btnViewIdea).setOnClickListener {
+                    val intent = Intent(itemView.context, IdeaDetailsActivity::class.java)
+                    intent.putExtra("title", idea.title)
+                    intent.putExtra("problem", idea.problem)
+                    intent.putExtra("solution", idea.solution)
+                    intent.putExtra("creator", "Chantel Diamini")
+                    intent.putStringArrayListExtra("skills", ArrayList(idea.requiredSkills))
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }

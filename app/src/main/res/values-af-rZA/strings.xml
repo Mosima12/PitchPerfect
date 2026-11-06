@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PitchPerfect</string>
+    <string name="tagline">Waar studente-entrepreneurs hul span vind.</string>
+    <string name="register">Registreer</string>
+    <string name="login">Teken in</string>
+    <string name="create_account">Skep jou rekening</string>
+    <string name="full_name">Volle Naam</string>
+    <string name="university">Universiteit</string>
+    <string name="university_email">Universiteit E-pos (.ac.za)</string>
+    <string name="password">Wagwoord</string>
+    <string name="create_account_btn">Skep Rekening</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_home">Tuis</string>
+    <string name="nav_discover">Ontdek</string>
+    <string name="nav_projects">Projekte</string>
+    <string name="nav_messages">Boodskappe</string>
+    <string name="nav_profile">Profiel</string>
+
+    <string name="settings">Instellings</string>
+    <string name="language">Toepassingstaal</string>
+    <string name="english">Engels</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="isizulu">isiZulu</string>
+    <string name="select_language">Kies Taal</string>
+</resources>

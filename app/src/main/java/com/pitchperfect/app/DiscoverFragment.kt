@@ -1,20 +1,31 @@
 package com.pitchperfect.app
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DiscoverFragment : Fragment() {
 
     private val auth = Firebase.auth
     private val db = Firebase.firestore
+    private var currentTargetId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +40,7 @@ class DiscoverFragment : Fragment() {
 
         val tvFeed = view.findViewById<TextView>(R.id.tvDiscoverFeed)
         val progress = view.findViewById<ProgressBar>(R.id.progressDiscover)
+        val btnLike = view.findViewById<Button>(R.id.btnLike)
 
         progress.visibility = View.VISIBLE
         tvFeed.text = ""
@@ -48,6 +60,10 @@ class DiscoverFragment : Fragment() {
                     val skills = doc.get("skills") as? List<*> ?: emptyList<Any>()
                     val score = (65 + (skills.size * 8)).coerceAtMost(96)
 
+                    if (currentTargetId == null) {
+                        currentTargetId = doc.id
+                    }
+
                     sb.append("👤  $name\n")
                     sb.append("🎓  $uni\n")
                     sb.append("📝  $bio\n")
@@ -66,5 +82,51 @@ class DiscoverFragment : Fragment() {
                 progress.visibility = View.GONE
                 tvFeed.text = "⚠️ Could not load students. Please try again later."
             }
+
+        // ---------------------------------------------------------
+        // POE REQUIREMENT: OFFLINE SYNC LOGIC
+        // ---------------------------------------------------------
+        btnLike.setOnClickListener {
+            val targetId = currentTargetId
+            val swiperId = auth.currentUser?.uid
+            val context = context ?: return@setOnClickListener
+
+            if (targetId == null || swiperId == null) {
+                Toast.makeText(context, "No user selected or not logged in", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val isOnline = isNetworkAvailable(context)
+
+            // 1. Save the swipe to the local Room Database (Works Offline)
+            CoroutineScope(Dispatchers.IO).launch {
+                val database = AppDatabase.getDatabase(context)
+                val newSwipe = PendingSwipe(
+                    swiperId = swiperId,
+                    targetId = targetId,
+                    action = "like"
+                )
+                database.swipeDao().insertSwipe(newSwipe)
+
+                // 2. Trigger the background worker to sync to Firebase
+                val syncRequest = OneTimeWorkRequestBuilder<SyncWorker>().build()
+                WorkManager.getInstance(context).enqueue(syncRequest)
+            }
+
+            // 3. Provide clear UI feedback for the video
+            if (isOnline) {
+                Toast.makeText(context, "Liked! Syncing to cloud...", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Offline Mode: Liked! Saved locally. Will sync when online.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    // Helper function to check internet connection
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
