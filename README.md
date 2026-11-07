@@ -13,10 +13,7 @@
 *   **Mosima Chantel Leboho** (ST10456440)
 *   Khumela Sendelani (ST10436040)
 *   Jones Matjentje Sepuru (ST10439177)
-*   Hlompho Petja (ST10457083)
-*   Ayanda Rikhotso (ST10286000)
-*   Lerato Mojalefa (ST10451890)
-*   Angel Kgafela (ST10384687)
+
 
 ---
 
