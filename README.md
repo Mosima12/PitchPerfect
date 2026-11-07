@@ -1,18 +1,14 @@
 # 📱 PitchPerfect: Student Entrepreneurship Platform
 
-![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
-![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-**Module:** Open Source (XISD6329/w)  
+
+**Module:** Open Source  
 **Institution:** The Independent Institute of Education (IIE)  
 **Project:** Final Portfolio of Evidence (PoE) - Part 3
 
 ## 👥 Authors & Contributors
 *   **Mosima Chantel Leboho** (ST10456440)
-*   Khumela Sendelani (ST10436040)
-*   Jones Matjentje Sepuru (ST10439177)
+*  
 
 
 ---
@@ -56,12 +52,7 @@ It bridges the gap between fragmented networking tools by providing a unified sp
 
 ---
 
-## 📸 Application Screenshots
-*(Upload your screenshots to your repository and replace the links below)*
 
-| Home Dashboard | Idea Details | Mentorship |
-| :---: | :---: | :---: |
-| `<img src="link-to-image" width="250">` | `<img src="link-to-image" width="250">` | `<img src="link-to-image" width="250">` |
 
 ---
 
@@ -89,7 +80,3 @@ In accordance with the open-source module guidelines, the following AI tools wer
 
 ---
 
-## 🏁 How to Run the Project
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/PitchPerfect2.git
