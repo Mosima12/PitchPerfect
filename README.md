@@ -20,15 +20,15 @@ It bridges the gap between fragmented networking tools by providing a unified sp
 
 | Home & Notifications | Dashboard | Discover |
 | :---: | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/placeholder1" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder2" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder3" width="200" /> |
+| <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20085421.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090242.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090256.png" width="220" /> |
 
 | Projects | Chat | Profile |
 | :---: | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/placeholder4" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder5" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder6" width="200" /> |
+| <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090312.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090325.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090457.png" width="220" /> |
 
 | Settings | Language Selection | Register / Login |
 | :---: | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/placeholder7" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder8" width="200" /> | <img src="https://github.com/user-attachments/assets/placeholder9" width="200" /> |
+| <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090515.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090524.png" width="220" /> | <img src="https://raw.githubusercontent.com/Mosima12/PitchPerfect/master/images/Screenshot%202026-11-11%20090610.png" width="220" /> |
 
 ---
 
