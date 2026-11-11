@@ -58,7 +58,7 @@ It bridges the gap between fragmented networking tools by providing a unified sp
 
 ## 🎥 Video Demonstration
 Watch the full demonstration of the PitchPerfect app running on a physical Android device:
-👉 **[INSERT UNLISTED YOUTUBE LINK HERE]**
+👉 **https://youtube.com/shorts/KIRjUzFPybc?feature=share**
 
 ---
 
