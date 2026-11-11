@@ -1,3 +1,4 @@
+<img width="385" height="828" alt="Screenshot 2026-11-11 085421" src="https://github.com/user-attachments/assets/61bcb245-9e12-43cb-bb8c-e2552c379a90" />
 # 📱 PitchPerfect: Student Entrepreneurship Platform
 
 
@@ -9,6 +10,7 @@
 ## 👥 Authors & Contributors
 *   **Mosima Chantel Leboho** (ST10456440)
 *  
+<img width="377" height="827" alt="Screenshot 2026-11-11 090242" src="https://github.com/user-attachments/assets/7f0f9761-0540-4d28-8abc-3dd21cb1768a" />
 
 
 ---
